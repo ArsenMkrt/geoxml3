@@ -1212,7 +1212,6 @@ function processStyleUrl(node) {
       polyOptions.path = paths[0];
       var p = new google.maps.Polyline(polyOptions);
     }
-    var p = new google.maps.Polyline(polyOptions);
     p.bounds = bounds;
 
     // setup and create the infoWindow if it is not suppressed
