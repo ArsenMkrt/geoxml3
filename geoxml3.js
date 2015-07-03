@@ -929,16 +929,17 @@ function processStyleUrl(node) {
 
     if (!doc.internals.parseOnly) {
       // geoXML3 is not being used only as a real-time parser, so keep the processed documents around
-      if (!docsByUrl[doc.baseUrl]) {
-        docs.push(doc);
-        docsByUrl[doc.baseUrl] = doc;
-      }
-      else {
-        // internal replacement, which keeps the same memory ref loc in docs and docsByUrl
-        for (var i in docsByUrl[doc.baseUrl]) {
-          docsByUrl[doc.baseUrl][i] = doc[i];
+      if (doc.baseUrl){ // handle case from parseKmlString (no doc.baseUrl)
+        if (!docsByUrl[doc.baseUrl]) {
+          docs.push(doc);
+          docsByUrl[doc.baseUrl] = doc;
+        } else {
+          // internal replacement, which keeps the same memory ref loc in docs and docsByUrl
+          for (var i in docsByUrl[doc.baseUrl]) {
+            docsByUrl[doc.baseUrl][i] = doc[i];
+          }
         }
-      }
+      }	  
     }
 
     doc.internals.remaining--;
